@@ -8,6 +8,11 @@ block content
     link(rel='stylesheet', href='/stylesheets/style.css')
 
     style(type='text/css')
+        
+        div.slider.slider-horizontal{
+            width: 100%;
+        }
+    
         svg {
           display: block;
           overflow: hidden;
@@ -75,7 +80,7 @@ block content
         }
     script(type='text/javascript')
         $('#foo').slider()
-        $('.slider slider-horizontal').removeAttr('style')
+        $(".slider slider-horizontal").attr('style', 'width: 100%;')
         var po = org.polymaps;
 
         var map = po.map()
