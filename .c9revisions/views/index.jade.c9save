@@ -11,3 +11,4 @@
 {"ts":1376347817936,"patch":[[{"diffs":[[0,"o\", "],[-1,"class=\"span2"],[1,"width=\"100%"],[0,"\", v"]],"start1":69,"start2":69,"length1":20,"length2":19}]],"length":5909,"saved":false}
 {"ts":1376348040694,"patch":[[{"diffs":[[0,"o\", "],[-1,"width=\"100%"],[1,"class=\"container-narrow"],[0,"\", v"]],"start1":69,"start2":69,"length1":19,"length2":31}]],"length":5921,"saved":false}
 {"ts":1376349132723,"patch":[[{"diffs":[[0,"lider()\n"],[1,"        $('.div.slider.slider-horizontal').removeAttr('style')\n"],[0,"        "]],"start1":1887,"start2":1887,"length1":16,"length2":79}]],"length":5984,"saved":false}
+{"ts":1376349290694,"patch":[[{"diffs":[[0,"$('."],[-1,"div."],[0,"slider"],[-1,"."],[1," "],[0,"slid"]],"start1":1903,"start2":1903,"length1":19,"length2":15}]],"length":5980,"saved":false}
