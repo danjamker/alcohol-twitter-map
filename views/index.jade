@@ -3,7 +3,6 @@ extends layout
 block content
     #map
     script(src='/polymaps/polymaps.min.js')
-    link(rel='stylesheet', href='/polymaps/lib/colorbrewer.css')
     style(type='text/css')
         svg {
           display: block;
@@ -102,8 +101,8 @@ block content
         }
         
       
-          var body = n$(document.body),
-              div = n$("#map").style("visibility", "visible"),
+          var body = $(document.body),
+              div = $("#map").style("visibility", "visible"),
               full = false;
         
           var svg = div.add("svg:svg")
