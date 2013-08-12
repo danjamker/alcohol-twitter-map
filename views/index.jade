@@ -99,7 +99,7 @@ block content
         
         map.add(po.compass()
             .pan("none"));
-        
+        console.log(map.zoomRange())
         function load(e) {
           for (var i = 0; i < e.features.length; i++) {
             var feature = e.features[i];
