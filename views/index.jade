@@ -89,12 +89,12 @@ block content
             .hosts(["a.", "b.", "c.", ""])));
         
         map.add(po.geoJson()
-            .url("http://polymaps.appspot.com/county/{Z}/{X}/{Y}.json")
+            .url("http://alcohol-twitter-map.herokuapp.com/{Z}/{X}/{Y}.json")
             .on("load", load)
             .id("county"));
         
         map.add(po.geoJson()
-            .url("http://polymaps.appspot.com/state/{Z}/{X}/{Y}.json")
+            .url("http://alcohol-twitter-map.herokuapp.com/{Z}/{X}/{Y}.json")
             .id("state"));
         
         map.add(po.compass()
