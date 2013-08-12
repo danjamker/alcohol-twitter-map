@@ -29,7 +29,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/:Z/:X/:Y.json', function (req, res) {
-    res.send('Hello World');
+    res.sendfile("./tmm.json");
 })
 
 
