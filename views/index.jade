@@ -4,12 +4,12 @@ block content
     #map
     script(src='/polymaps/polymaps.min.js')
     script(src='/javascripts/nns.min.js')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
     style(type='text/css')
         svg {
           display: block;
           overflow: hidden;
-          width: 100%;
-          height: 100%;
         }
         
         #copy {
@@ -65,7 +65,13 @@ block content
         .compass.active .active .direction {
           fill: #999;
         }
-
+        
+        div#map {
+          position: relative;
+          border: solid 4px #ccc;
+          background: #eee;
+          height: 500px;
+        }
     script(type='text/javascript')
         var po = org.polymaps;
 
