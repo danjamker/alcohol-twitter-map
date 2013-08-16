@@ -22,6 +22,17 @@ block content
         fill:#7A0177
         }
         
+        #county path {
+          stroke: rgb(192, 192, 192);
+          stroke-opacity: .25;
+          shape-rendering: crispEdges;
+        }
+        
+        #state path {
+          stroke: #fff;
+          stroke-width: 1.5px;
+        }
+        
         #copy {
           position: absolute;
           left: 0;
@@ -117,7 +128,7 @@ block content
         function load(e) {
           for (var i = 0; i < e.features.length; i++) {
             var feature = e.features[i];
-            feature.element.setAttribute("id", "apple");
+            feature.element.setAttribute("id", feature.data.id);
             console.log(feature.data.id)
           }
         }
