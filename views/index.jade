@@ -18,6 +18,10 @@ block content
           overflow: hidden;
         }
         
+        #apple{
+        fill:#7A0177
+        }
+        
         #copy {
           position: absolute;
           left: 0;
@@ -113,7 +117,7 @@ block content
         function load(e) {
           for (var i = 0; i < e.features.length; i++) {
             var feature = e.features[i];
-            feature.element.setAttribute("id", feature.data.id);
+            feature.element.setAttribute("id", "apple");
             console.log(feature.data.id)
           }
         }
