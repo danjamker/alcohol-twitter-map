@@ -19613,7 +19613,7 @@
             },
             "properties": {
                 "name": "YO62",
-                "styleUrl": "#stylePostcode",
+                "styleUrl": "#county:47011",
                 "styleHash": "-26151272",
                 "description": "YO62 postcode district"
             }
