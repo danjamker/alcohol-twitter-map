@@ -28,10 +28,12 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/:Z/:X/:Y.json', function (req, res) {
-    res.sendfile("./tmp.json");
+app.get('/National.json', function (req, res) {
+    res.sendfile("./GeoJSON/National.json");
 })
-
+app.get('/Regional.json', function (req, res) {
+    res.sendfile("./GeoJSON/Regional.json");
+})
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
