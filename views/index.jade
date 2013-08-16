@@ -124,8 +124,8 @@ block content
         function load(e) {
           for (var i = 0; i < e.features.length; i++) {
             var feature = e.features[i];
-            feature.element.setAttribute("id", feature.data.id);
-            console.log(feature.data.id)
+            feature.element.setAttribute("id", feature.data.name);
+            console.log(feature.data.name)
           }
         }
         
