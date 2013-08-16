@@ -116,7 +116,7 @@ block content
             .url("http://alcohol-twitter-map.herokuapp.com/National.json")
             .on("load", load)
             .id("county")
-        
+        map.add(regional)
         map.add(national);
         var layerType = "national"
         //map.add(po.geoJson()
