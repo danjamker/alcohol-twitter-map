@@ -123,10 +123,11 @@ block content
             // get the current zoom
             var z = map.zoom();
             if(z > 8){
-             console.log("Daniel")
+             console.log(z)
             }
             else{
             console.log("Kershaw")
+            console.log(z)
             }
             
             });
@@ -135,7 +136,6 @@ block content
           for (var i = 0; i < e.features.length; i++) {
             var feature = e.features[i];
             feature.element.setAttribute("id", feature.data.properties.name);
-            console.log(feature.data.properties.name)
           }
         }
         
