@@ -98,7 +98,7 @@ block content
             .container(document.getElementById("map").appendChild(po.svg("svg")))
             .center({lat: 53, lon: -1})
             .zoom(5)
-            .zoomRange([3, 7])
+            .zoomRange([3, 10])
             .add(po.interact());
         
         map.add(po.image()
@@ -119,7 +119,17 @@ block content
         map.add(po.compass()
             .pan("none"));
         
-        map.zoomRange([0, 18])
+        map.on("move", function() {
+            // get the current zoom
+            var z = map.zoom();
+            if(z > 8){
+             console.log("Daniel")
+            }
+            else{
+            console.log("Kershaw")
+            }
+            
+            });
         
         function load(e) {
           for (var i = 0; i < e.features.length; i++) {
