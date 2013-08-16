@@ -28,7 +28,7 @@ block content
           shape-rendering: crispEdges;
         }
         
-        #state path {
+        #county path {
           stroke: #fff;
           stroke-width: 1.5px;
         }
@@ -116,9 +116,9 @@ block content
             .on("load", load)
             .id("county"));
         
-        map.add(po.geoJson()
-            .url("http://alcohol-twitter-map.herokuapp.com/{Z}/{X}/{Y}.json")
-            .id("state"));
+        //map.add(po.geoJson()
+        //    .url("http://alcohol-twitter-map.herokuapp.com/{Z}/{X}/{Y}.json")
+        //    .id("state"));
         
         map.add(po.compass()
             .pan("none"));
