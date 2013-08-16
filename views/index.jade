@@ -107,13 +107,18 @@ block content
             + "/20760/256/{Z}/{X}/{Y}.png")
             .hosts(["a.", "b.", "c.", ""])));
         
-        myLayer = po.geoJson()
+        regional = po.geoJson()
+            .url("http://alcohol-twitter-map.herokuapp.com/{Z}/{X}/{Y}.json")
+            .on("load", load)
+            .id("county")
+            
+        national = po.geoJson()
             .url("http://alcohol-twitter-map.herokuapp.com/{Z}/{X}/{Y}.json")
             .on("load", load)
             .id("county")
         
-        map.add(myLayer);
-        
+        map.add(national);
+        var layerType = "national"
         //map.add(po.geoJson()
         //    .url("http://alcohol-twitter-map.herokuapp.com/{Z}/{X}/{Y}.json")
         //    .id("state"));
@@ -125,10 +130,21 @@ block content
             // get the current zoom
             var z = map.zoom();
             if(z > 8){
-                map.remove(myLayer);
                 console.log(z)
+                if(layerType != "regional"){
+                    console.log("regional")
+                    map.remove(national);
+                    map.add(regional)
+                    layerType = "regional"
+                }
             }
             else{
+                if(layerType != "national"){
+                    console.log("national")
+                    map.remove(regional);
+                    map.add(national)
+                    layerType = "national"
+                }
                 console.log("Kershaw")
                 console.log(z)
             }
