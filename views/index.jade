@@ -107,10 +107,12 @@ block content
             + "/20760/256/{Z}/{X}/{Y}.png")
             .hosts(["a.", "b.", "c.", ""])));
         
-        map.add(po.geoJson()
+        myLayer = po.geoJson()
             .url("http://alcohol-twitter-map.herokuapp.com/{Z}/{X}/{Y}.json")
             .on("load", load)
-            .id("county"));
+            .id("county")
+        
+        map.add(myLayer);
         
         //map.add(po.geoJson()
         //    .url("http://alcohol-twitter-map.herokuapp.com/{Z}/{X}/{Y}.json")
@@ -123,11 +125,12 @@ block content
             // get the current zoom
             var z = map.zoom();
             if(z > 8){
-             console.log(z)
+                map.remove(myLayer);
+                console.log(z)
             }
             else{
-            console.log("Kershaw")
-            console.log(z)
+                console.log("Kershaw")
+                console.log(z)
             }
             
             });
