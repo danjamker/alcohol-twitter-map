@@ -96,7 +96,7 @@ block content
     script(type='text/javascript')
         $('#foo').slider().on('slide', function(ev){
            console.log(ev)
-           tmp = moment("2013-05-27H00", "YYYY-MM-DD\HHH").add('h', ev.value).format("YYYY-MM-DD\HHH");;
+           tmp = moment("2013-05-27H00", "YYYY-MM-DD[H]HH").add('h', ev.value).format("YYYY-MM-DD[H]HH");;
             console.log(tmp)
             $("#mapStyleSheet").attr({href : "/stylesheets/"+tmp+".css"});
         });
