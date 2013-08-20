@@ -6,6 +6,7 @@ block content
     script(src='/polymaps/polymaps.min.js')
     script(src='/javascripts/nns.min.js')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/2013-06-04.css')
 
     style(type='text/css')
         @import('/stylesheets/population.css')
@@ -157,7 +158,6 @@ block content
           for (var i = 0; i < e.features.length; i++) {
             var feature = e.features[i];
             feature.element.setAttribute("id", feature.data.properties.name);
-            console.log(feature.data.properties.name);
           }
         }
         
