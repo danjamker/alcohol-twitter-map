@@ -93,7 +93,11 @@ block content
           height: 500px;
         }
     script(type='text/javascript')
-        $('#foo').slider()
+        $('#foo').slider().on('slide', function(ev){
+           console.log(ev)
+        });
+        
+        
         $("div.slider.slider-horizontal").attr('style', 'width: 100%;')
         var po = org.polymaps;
 
