@@ -2,12 +2,12 @@ extends layout
  
 block content
     #map
-    input(type="text", id="foo", class="container-narrow", value="", data-slider-min="0", data-slider-max="336", data-slider-step="1", data-slider-value="-14", data-slider-orientation="horizontal", data-slider-selection="after",data-slider-tooltip="hide")
+    input(type="text", id="foo", class="container-narrow", value="", data-slider-min="0", data-slider-max="336", data-slider-step="1", data-slider-value="0", data-slider-orientation="horizontal", data-slider-selection="after",data-slider-tooltip="hide")
     script(src='/polymaps/polymaps.min.js')
     script(src='/javascripts/nns.min.js')
     script(src='/javascripts/moment.min.js')
     link(rel='stylesheet', href='/stylesheets/style.css')
-    link(rel='stylesheet', href='/stylesheets/2013-06-04.css', id="mapStyleSheet")
+    link(rel='stylesheet', href='/stylesheets/2013-05-23T00.css', id="mapStyleSheet")
 
     style(type='text/css')
         @import('/stylesheets/population.css')
