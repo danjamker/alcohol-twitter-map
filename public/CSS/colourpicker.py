@@ -15,28 +15,40 @@ def main():
 
 	Masterday = datetime.datetime(2013, 05, 23)
 
-	g = geo()
-	postcodes = g.getPostCodes()
-	postcoderegions = g.getPostCodeRegions()
-	regons = g.getRegions()
-	national = ["National-UK"]
+	# g = geo()
+	# postcodes = g.getPostCodes()
+	# postcoderegions = g.getPostCodeRegions()
+	# regons = g.getRegions()
+	# national = ["National-UK"]
 
-	days = {"Monday":9,
-			"Tuesday":9,
-			"Wednesday":10,
-			"Thursday":16,
-			"Friday":14,
-			"Saturday":29,
-			"Sunday":23}
+	# days = {"Monday":9,
+	# 		"Tuesday":9,
+	# 		"Wednesday":10,
+	# 		"Thursday":16,
+	# 		"Friday":14,
+	# 		"Saturday":29,
+	# 		"Sunday":23}
 
-	iterateoverList(postcoderegions)
-	iterateoverList(regons)
-	iterateoverList(postcodes)
+	Masterday = datetime.datetime(2013, 05, 23)
+	for d in range(0,14):
+		print "d"
+		print d
+		t = (Masterday+datetime.timedelta(days=d)).strftime("%Y-%m-%d") 
+		print t
+		iterateoverList(t)
+		for h in range(0, 23):
+			t = (Masterday+datetime.timedelta(days=d, hours = h)).strftime("%Y-%m-%dT%H") 
+			print t
+			iterateoverList(t)
+	#iterateoverList(postcoderegions)
+	#iterateoverList(regons)
+	#iterateoverList(postcodes)
 
 	
 
 	
-def iterateoverList(locations):
+def iterateoverList(time):
+	
 	red = Color("red")
 	blue = Color("blue")
 	colours = list(red.range_to(blue, 100))
@@ -47,23 +59,17 @@ def iterateoverList(locations):
 	collection = db['13082013']
 
 	scores = []
-	for term in locations:
-		for tweet in collection.find({"location": term.replace(' ','-' ) }):
+	with open(time+".css", "a") as myfile:
+		for tweet in collection.find({"time": time }):
 			scores.append(float(tweet["score"]))
 
-	for term in locations:
-		for tweet in collection.find({"location": term.replace(' ','-' ) }):
+		for tweet in collection.find({"time": time }):
 			for i in range(0, 100):
 				if tweet["score"] < scoreatpercentile(np.array(scores), i):
-					toCSS(colours[i],term,tweet["time"])
+					print tweet["location"]
+					myfile.write("#"+tweet["location"]+"{fill:"+str(colours[i])+"}\n")
 					break
-						
 
-
-
-def toCSS(colour, id, file):
-	with open(file+".css", "a") as myfile:
-    		myfile.write("#"+id.replace(' ','-')+"{fill:"+str(colour)+"}\n")
 
 if __name__ == '__main__':
 	main()
