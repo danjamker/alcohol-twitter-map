@@ -124,7 +124,7 @@ block content
         // var legend = 'Data from Robert Kieffer.';
         // var fullscreenControl = new L.Control.Fullscreen().addTo(map);
         
-        // var geojsonURL = 'http://http://alcohol-twitter-map.herokuapp.com/state/{z}/{x}/{y}.json';
+        // var geojsonURL = '';
         // var geojsonTileLayer = new L.TileLayer.GeoJSON(geojsonURL, {
         //         clipTiles: true,
         //         unique: function (feature) {
@@ -155,6 +155,11 @@ block content
         // );
         // map.addLayer(geojsonTileLayer);
         
-        map.on("move", function(e) { console.log(e) });
+        map.on("move", function(e) {
+        console.log(e) 
+        var z = map.zoom();
+            var markerLayer = L.mapbox.markerLayer("http://http://alcohol-twitter-map.herokuapp.com/state/{z}/{x}/{y}.json").addTo(map);
+        
+        });
 
         
