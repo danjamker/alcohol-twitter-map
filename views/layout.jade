@@ -13,53 +13,72 @@ html
         meta(name='description', content='')
         meta(name='author', content='Daniel Kershaw')
         style(type='text/css')
+            html,
             body {
-            padding-top: 20px;
-            padding-bottom: 40px;
+              height: 100%;
+              /* The html and body elements cannot have any padding or margin. */
             }
-            /* Custom container */
-            .container-narrow {
-            margin: 0 auto;
-            max-width: 700px;
+            
+            /* Wrapper for page content to push down footer */
+            #wrap {
+              min-height: 100%;
+              height: auto !important;
+              height: 100%;
+              /* Negative indent footer by its height */
+              margin: 0 auto -60px;
+              /* Pad bottom by footer height */
+              padding: 0 0 60px;
             }
-            .container-narrow > hr {
-            margin: 30px 0;
+            
+            /* Set the fixed height of the footer here */
+            #footer {
+              height: 60px;
+              background-color: #f5f5f5;
             }
-            /* Main marketing message and sign up button */
-            .jumbotron {
-            margin: 60px 0;
-            text-align: center;
+            
+            
+            /* Custom page CSS
+            -------------------------------------------------- */
+            /* Not required for template or sticky footer method. */
+            
+            #wrap > .container {
+              padding: 60px 15px 0;
             }
-            .jumbotron h1 {
-            font-size: 72px;
-            line-height: 1;
+            .container .credit {
+              margin: 20px 0;
             }
-            .jumbotron .btn {
-            font-size: 21px;
-            padding: 14px 24px;
+            
+            #footer > .container {
+              padding-left: 15px;
+              padding-right: 15px;
             }
-            /* Supporting marketing content */
-            .marketing {
-            margin: 60px 0;
-            }
-            .marketing p + h4 {
-            margin-top: 28px;
+            
+            code {
+              font-size: 80%;
             }
     body
-        .container-narrow
-            .masthead
-                ul.nav.nav-pills.pull-right
-                    li
-                        a(href='#') Home
-                    li
-                        a(href='#') About
-                    li
-                        a(href='#') Contact
-                h3.muted Alcholic Tweeters
-            hr
+        #wrap
+            .navbar.navbar-default.navbar-fixed-top
+                .container
+                    .navbar-header
+                        button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+                            span.icon-bar
+                            span.icon-bar
+                            span.icon-bar
+                        a.navbar-brand(href='#') Project name
+                    .collapse.navbar-collapse
+                        ul.nav.navbar-nav
+                            li.active
+                                a(href='#') Home
+                            li
+                                a(href='#about') About
+                            li
+                                a(href='#contact') Contact
+
             
             block content
             
-            hr
-            .footer
-                p © Daniel Kershaw 2013
+            
+            #footer
+                .container
+                    p © Daniel Kershaw 2013
