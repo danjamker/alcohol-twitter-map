@@ -114,19 +114,19 @@ block content
         // var gridControl = L.mapbox.gridControl(gridLayer, {follow: true})
         //     .addTo(map);
         
-        document.getElementById('grid').onclick = function() {
-            if (this.className === 'active') {
-                map.removeLayer(tileLayer);
-                map.removeLayer(gridLayer);
-                map.removeControl(gridControl);
-                this.className = '';
-            } else {
-                map.addLayer(tileLayer);
-                map.addLayer(gridLayer);
-                map.addControl(gridControl);
-                this.className = 'active';
-            }
-        };
+        // document.getElementById('grid').onclick = function() {
+        //     if (this.className === 'active') {
+        //         map.removeLayer(tileLayer);
+        //         map.removeLayer(gridLayer);
+        //         map.removeControl(gridControl);
+        //         this.className = '';
+        //     } else {
+        //         map.addLayer(tileLayer);
+        //         map.addLayer(gridLayer);
+        //         map.addControl(gridControl);
+        //         this.className = 'active';
+        //     }
+        // };
         
         var legend = 'Data from Robert Kieffer.';
         
