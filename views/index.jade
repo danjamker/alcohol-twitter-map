@@ -1,20 +1,20 @@
 extends layout
 block content
     #map
-        #map-ui
-            ul
-              li
-                a#grid.active(href='#') Interactivity
-              li
-                a#legend(href='#') Legend
-              li
-                a#zoomer.active(href='#') Zoomer
-              li
-                a#fullscreen(href='#') Fullscreen
-              li
-                a#attribution.active(href='#') Attribution
-              li
-                a#hash(href='#') Hash
+        // #map-ui
+        //     ul
+        //       li
+        //         a#grid.active(href='#') Interactivity
+        //       li
+        //         a#legend(href='#') Legend
+        //       li
+        //         a#zoomer.active(href='#') Zoomer
+        //       li
+        //         a#fullscreen(href='#') Fullscreen
+        //       li
+        //         a#attribution.active(href='#') Attribution
+        //       li
+        //         a#hash(href='#') Hash
                 
     //input(type="text", id="foo", class="container-narrow", value="", data-slider-min="0", data-slider-max="336", data-slider-step="1", data-slider-value="0", data-slider-orientation="horizontal", data-slider-selection="after",data-slider-tooltip="hide")
     script(src='http://api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.js')
@@ -140,38 +140,38 @@ block content
             }
         };
         
-        var fullscreenControl = new L.Control.Fullscreen();
+        var fullscreenControl = new L.Control.Fullscreen().addTo(map);
         var hash = L.hash();
         
-        // Connect check boxes to ui functions
-        function toggle(control, element) {
-            if (element.className === 'active') {
-                control.removeFrom(map);
-                element.className = '';
-            } else {
-                control.addTo(map);
-                element.className = 'active';
-            }
-        }
+        // // Connect check boxes to ui functions
+        // function toggle(control, element) {
+        //     if (element.className === 'active') {
+        //         control.removeFrom(map);
+        //         element.className = '';
+        //     } else {
+        //         control.addTo(map);
+        //         element.className = 'active';
+        //     }
+        // }
         
-        document.getElementById('zoomer').onclick = function() {
-            toggle(map.zoomControl, this);
-        };
+        // document.getElementById('zoomer').onclick = function() {
+        //     toggle(map.zoomControl, this);
+        // };
         
-        document.getElementById('fullscreen').onclick = function() {
-            toggle(fullscreenControl, this);
-        };
+        // document.getElementById('fullscreen').onclick = function() {
+        //     toggle(fullscreenControl, this);
+        // };
         
-        document.getElementById('attribution').onclick = function() {
-            toggle(map.attributionControl, this);
-        };
+        // document.getElementById('attribution').onclick = function() {
+        //     toggle(map.attributionControl, this);
+        // };
         
-        document.getElementById('hash').onclick = function() {
-            if (this.className === 'active') {
-                hash.remove();
-                this.className = '';
-            } else {
-                hash.init(map);
-                this.className = 'active';
-            }
-        };
+        // document.getElementById('hash').onclick = function() {
+        //     if (this.className === 'active') {
+        //         hash.remove();
+        //         this.className = '';
+        //     } else {
+        //         hash.init(map);
+        //         this.className = 'active';
+        //     }
+        // };
