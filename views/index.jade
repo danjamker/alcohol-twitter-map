@@ -126,12 +126,11 @@ block content
             .url("http://alcohol-twitter-map.herokuapp.com/National.json")
             .on("load", load)
             .id("county")
+            
         map.add(regional)
         map.add(national);
         var layerType = "national"
-        //map.add(po.geoJson()
-        //    .url("http://alcohol-twitter-map.herokuapp.com/{Z}/{X}/{Y}.json")
-        //    .id("state"));
+
         
         map.add(po.compass()
             .pan("none"));
@@ -140,22 +139,13 @@ block content
             // get the current zoom
             console.log(map.Bounds())
             var z = map.zoom();
-            if(z > 8){
-                console.log(z)
-                if(layerType != "regional"){
-                    console.log("regional")
-                    //map.remove(national);
-                    map.add(regional)
-                    layerType = "regional"
-                }
-            }
-            else{
-                if(layerType != "national"){
-                    console.log("national")
-                    map.remove(regional);
-                    map.add(national)
-                    layerType = "national"
-                }
+            var c = map.centerRange();
+            
+            national = po.geoJson()
+            .url("http://alcohol-twitter-map.herokuapp.com/"+z+"/"+c[0]["lat"]+"/"++c[0]["lon"]++"/"+c[1]["lat"]+"/"+c[1]["lon"]+".json")
+            .on("load", load)
+            .id("county")
+            
             }
             
             });
