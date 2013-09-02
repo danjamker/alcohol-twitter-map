@@ -106,7 +106,8 @@ block content
         
         var map = L.mapbox.map('map', 'examples.map-uci7ul8p', {attributionControl: false})
             .setView([38.82, -94.96], 4);
-        
+        map.addLayer(L.tileLayer('http://alcohol-twitter-map.herokuapp.com/National.json'));
+
         // var tileLayer = L.mapbox.tileLayer('examples.npr-stations')
         //     .addTo(map);
         // var gridLayer = L.mapbox.gridLayer('examples.npr-stations')
@@ -141,8 +142,8 @@ block content
         // };
         
         var fullscreenControl = new L.Control.Fullscreen().addTo(map);
-        var hash = L.hash();
-        
+        map.addLayer(L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png'));
+
         // // Connect check boxes to ui functions
         // function toggle(control, element) {
         //     if (element.className === 'active') {
