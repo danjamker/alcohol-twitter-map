@@ -120,39 +120,41 @@ block content
         
         var map = L.mapbox.map('map', 'examples.map-uci7ul8p', {attributionControl: false})
             .setView([38.82, -94.96], 4);
-        map.addLayer(L.tileLayer('http://alcohol-twitter-map.herokuapp.com/National.json'));
-        var legend = 'Data from Robert Kieffer.';
-        var fullscreenControl = new L.Control.Fullscreen().addTo(map);
+        // map.addLayer(L.tileLayer('http://alcohol-twitter-map.herokuapp.com/National.json'));
+        // var legend = 'Data from Robert Kieffer.';
+        // var fullscreenControl = new L.Control.Fullscreen().addTo(map);
         
-        var geojsonURL = 'http://http://alcohol-twitter-map.herokuapp.com/state/{z}/{x}/{y}.json';
-        var geojsonTileLayer = new L.TileLayer.GeoJSON(geojsonURL, {
-                clipTiles: true,
-                unique: function (feature) {
-                    return feature.id; 
-                }
-            }, {
-                style: style,
-                onEachFeature: function (feature, layer) {
-                    if (feature.properties) {
-                        var popupString = '<div class="popup">';
-                        for (var k in feature.properties) {
-                            var v = feature.properties[k];
-                            popupString += k + ': ' + v + '<br />';
-                        }
-                        popupString += '</div>';
-                        layer.bindPopup(popupString);
-                    }
-                    if (!(layer instanceof L.Point)) {
-                        layer.on('mouseover', function () {
-                            layer.setStyle(hoverStyle);
-                        });
-                        layer.on('mouseout', function () {
-                            layer.setStyle(style);
-                        });
-                    }
-                }
-            }
-        );
-        map.addLayer(geojsonTileLayer);
+        // var geojsonURL = 'http://http://alcohol-twitter-map.herokuapp.com/state/{z}/{x}/{y}.json';
+        // var geojsonTileLayer = new L.TileLayer.GeoJSON(geojsonURL, {
+        //         clipTiles: true,
+        //         unique: function (feature) {
+        //             return feature.id; 
+        //         }
+        //     }, {
+        //         style: style,
+        //         onEachFeature: function (feature, layer) {
+        //             if (feature.properties) {
+        //                 var popupString = '<div class="popup">';
+        //                 for (var k in feature.properties) {
+        //                     var v = feature.properties[k];
+        //                     popupString += k + ': ' + v + '<br />';
+        //                 }
+        //                 popupString += '</div>';
+        //                 layer.bindPopup(popupString);
+        //             }
+        //             if (!(layer instanceof L.Point)) {
+        //                 layer.on('mouseover', function () {
+        //                     layer.setStyle(hoverStyle);
+        //                 });
+        //                 layer.on('mouseout', function () {
+        //                     layer.setStyle(style);
+        //                 });
+        //             }
+        //         }
+        //     }
+        // );
+        // map.addLayer(geojsonTileLayer);
+        
+        map.on("move", function() { console.log("Daniel") });
 
         
