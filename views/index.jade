@@ -156,7 +156,7 @@ block content
         // map.addLayer(geojsonTileLayer);
         
         map.on("move", function(e) {
-        console.log(e) 
+        console.log(map.getBounds()map.getBounds()) 
             var markerLayer = L.mapbox.markerLayer("http://http://alcohol-twitter-map.herokuapp.com/state/"+map.getZoom()+"/"+map.getBounds()+".json").addTo(map);
         
         });
