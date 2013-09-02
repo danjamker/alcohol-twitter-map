@@ -114,64 +114,64 @@ block content
         // var gridControl = L.mapbox.gridControl(gridLayer, {follow: true})
         //     .addTo(map);
         
-        // document.getElementById('grid').onclick = function() {
-        //     if (this.className === 'active') {
-        //         map.removeLayer(tileLayer);
-        //         map.removeLayer(gridLayer);
-        //         map.removeControl(gridControl);
-        //         this.className = '';
-        //     } else {
-        //         map.addLayer(tileLayer);
-        //         map.addLayer(gridLayer);
-        //         map.addControl(gridControl);
-        //         this.className = 'active';
-        //     }
-        // };
+        document.getElementById('grid').onclick = function() {
+            if (this.className === 'active') {
+                map.removeLayer(tileLayer);
+                map.removeLayer(gridLayer);
+                map.removeControl(gridControl);
+                this.className = '';
+            } else {
+                map.addLayer(tileLayer);
+                map.addLayer(gridLayer);
+                map.addControl(gridControl);
+                this.className = 'active';
+            }
+        };
         
-        // var legend = 'Data from Robert Kieffer.';
+        var legend = 'Data from Robert Kieffer.';
         
-        // document.getElementById('legend').onclick = function() {
-        //     if (this.className === 'active') {
-        //         map.legendControl.removeLegend(legend);
-        //         this.className = '';
-        //     } else {
-        //         map.legendControl.addLegend(legend);
-        //         this.className = 'active';
-        //     }
-        // };
+        document.getElementById('legend').onclick = function() {
+            if (this.className === 'active') {
+                map.legendControl.removeLegend(legend);
+                this.className = '';
+            } else {
+                map.legendControl.addLegend(legend);
+                this.className = 'active';
+            }
+        };
         
-        // var fullscreenControl = new L.Control.Fullscreen();
-        // var hash = L.hash();
+        var fullscreenControl = new L.Control.Fullscreen();
+        var hash = L.hash();
         
-        // // Connect check boxes to ui functions
-        // function toggle(control, element) {
-        //     if (element.className === 'active') {
-        //         control.removeFrom(map);
-        //         element.className = '';
-        //     } else {
-        //         control.addTo(map);
-        //         element.className = 'active';
-        //     }
-        // }
+        // Connect check boxes to ui functions
+        function toggle(control, element) {
+            if (element.className === 'active') {
+                control.removeFrom(map);
+                element.className = '';
+            } else {
+                control.addTo(map);
+                element.className = 'active';
+            }
+        }
         
-        // document.getElementById('zoomer').onclick = function() {
-        //     toggle(map.zoomControl, this);
-        // };
+        document.getElementById('zoomer').onclick = function() {
+            toggle(map.zoomControl, this);
+        };
         
-        // document.getElementById('fullscreen').onclick = function() {
-        //     toggle(fullscreenControl, this);
-        // };
+        document.getElementById('fullscreen').onclick = function() {
+            toggle(fullscreenControl, this);
+        };
         
-        // document.getElementById('attribution').onclick = function() {
-        //     toggle(map.attributionControl, this);
-        // };
+        document.getElementById('attribution').onclick = function() {
+            toggle(map.attributionControl, this);
+        };
         
-        // document.getElementById('hash').onclick = function() {
-        //     if (this.className === 'active') {
-        //         hash.remove();
-        //         this.className = '';
-        //     } else {
-        //         hash.init(map);
-        //         this.className = 'active';
-        //     }
-        // };
+        document.getElementById('hash').onclick = function() {
+            if (this.className === 'active') {
+                hash.remove();
+                this.className = '';
+            } else {
+                hash.init(map);
+                this.className = 'active';
+            }
+        };
