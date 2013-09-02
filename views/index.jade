@@ -1,256 +1,256 @@
 extends layout
- 
-#map
-input(type="text", id="foo", class="container-narrow", value="", data-slider-min="0", data-slider-max="336", data-slider-step="1", data-slider-value="0", data-slider-orientation="horizontal", data-slider-selection="after",data-slider-tooltip="hide")
-script(src='/polymaps/polymaps.min.js')
-script(src='/javascripts/nns.min.js')
-script(src='/javascripts/moment.min.js')
-link(rel='stylesheet', href='/stylesheets/style.css')
-link(rel='stylesheet', href='/CSS/2013-05-23T00.css', id="mapStyleSheet")
-
-style(type='text/css')
-    @import('/stylesheets/population.css')
-    @import('/CSS/2013-05-23T00.css')
+block content
+    #map
+    input(type="text", id="foo", class="container-narrow", value="", data-slider-min="0", data-slider-max="336", data-slider-step="1", data-slider-value="0", data-slider-orientation="horizontal", data-slider-selection="after",data-slider-tooltip="hide")
+    script(src='/polymaps/polymaps.min.js')
+    script(src='/javascripts/nns.min.js')
+    script(src='/javascripts/moment.min.js')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/CSS/2013-05-23T00.css', id="mapStyleSheet")
     
-    div.slider.slider-horizontal{
-        width: 100%;
-    }
-
-    svg {
-      display: block;
-      overflow: hidden;
-    }
-    
-    path#apple{
-    fill:#7A0177
-    }
-
-    #county path {
-      stroke: #fff;
-      stroke-width: 1.5px;
-    }
-    
-    #copy {
-      position: absolute;
-      left: 0;
-      bottom: 4px;
-      padding-left: 5px;
-      font: 9px sans-serif;
-      color: #fff;
-      cursor: default;
-    }
-    
-    #copy a {
-      color: #fff;
-    }
-    
-    .compass .back {
-      fill: #eee;
-      fill-opacity: .8;
-    }
-    
-    .compass .fore {
-      stroke: #999;
-      stroke-width: 1.5px;
-    }
-    
-    .compass rect.back.fore {
-      fill: #999;
-      fill-opacity: .3;
-      stroke: #eee;
-      stroke-width: 1px;
-      shape-rendering: crispEdges;
-    }
-    
-    .compass .direction {
-      fill: none;
-    }
-    
-    .compass .chevron {
-      fill: none;
-      stroke: #999;
-      stroke-width: 5px;
-    }
-    
-    .compass .zoom .chevron {
-      stroke-width: 4px;
-    }
-    
-    .compass .active .chevron, .compass .chevron.active {
-      stroke: #fff;
-    }
-    
-    .compass.active .active .direction {
-      fill: #999;
-    }
-    #YO26{
-      fill:#49006A
-    }
-    div#map {
-      position: relative;
-      border: solid 4px #ccc;
-      background: #eee;
-      height: 500px;
-    }
-script(type='text/javascript')
-    $('#foo').slider().on('slide', function(ev){
-       console.log(ev)
-       tmp = moment("2013-05-23T00", "YYYY-MM-DD[T]HH").add('h', ev.value).format("YYYY-MM-DD[T]HH");;
-        console.log(tmp)
-        $("#mapStyleSheet").attr({href : "/CSS/"+tmp+".css"});
-    });
-    
-    
-    $("div.slider.slider-horizontal").attr('style', 'width: 100%;')
-    var po = org.polymaps;
-
-    var map = po.map()
-        .container(document.getElementById("map").appendChild(po.svg("svg")))
-        .center({lat: 53, lon: -1})
-        .zoom(5)
-        .zoomRange([3, 10])
-        .add(po.interact());
-    
-    map.add(po.image()
-        .url(po.url("http://{S}tile.cloudmade.com"
-        + "/1a1b06b230af4efdbb989ea99e9841af" // http://cloudmade.com/register
-        + "/20760/256/{Z}/{X}/{Y}.png")
-        .hosts(["a.", "b.", "c.", ""])));
-    
-    regional = po.geoJson()
-        .url("http://alcohol-twitter-map.herokuapp.com/Regional.json")
-        .on("load", load)
-        .id("county")
+    style(type='text/css')
+        @import('/stylesheets/population.css')
+        @import('/CSS/2013-05-23T00.css')
         
-    national = po.geoJson()
-        .url("http://alcohol-twitter-map.herokuapp.com/National.json")
-        .on("load", load)
-        .id("county")
-    map.add(regional)
-    map.add(national);
-    var layerType = "national"
-    //map.add(po.geoJson()
-    //    .url("http://alcohol-twitter-map.herokuapp.com/{Z}/{X}/{Y}.json")
-    //    .id("state"));
-    
-    map.add(po.compass()
-        .pan("none"));
-    
-    map.on("move", function() {
-        // get the current zoom
-        var z = map.zoom();
-        if(z > 8){
-            console.log(z)
-            if(layerType != "regional"){
-                console.log("regional")
-                //map.remove(national);
-                map.add(regional)
-                layerType = "regional"
-            }
+        div.slider.slider-horizontal{
+            width: 100%;
         }
-        else{
-            if(layerType != "national"){
-                console.log("national")
-                map.remove(regional);
-                map.add(national)
-                layerType = "national"
-            }
+    
+        svg {
+          display: block;
+          overflow: hidden;
         }
         
+        path#apple{
+        fill:#7A0177
+        }
+    
+        #county path {
+          stroke: #fff;
+          stroke-width: 1.5px;
+        }
+        
+        #copy {
+          position: absolute;
+          left: 0;
+          bottom: 4px;
+          padding-left: 5px;
+          font: 9px sans-serif;
+          color: #fff;
+          cursor: default;
+        }
+        
+        #copy a {
+          color: #fff;
+        }
+        
+        .compass .back {
+          fill: #eee;
+          fill-opacity: .8;
+        }
+        
+        .compass .fore {
+          stroke: #999;
+          stroke-width: 1.5px;
+        }
+        
+        .compass rect.back.fore {
+          fill: #999;
+          fill-opacity: .3;
+          stroke: #eee;
+          stroke-width: 1px;
+          shape-rendering: crispEdges;
+        }
+        
+        .compass .direction {
+          fill: none;
+        }
+        
+        .compass .chevron {
+          fill: none;
+          stroke: #999;
+          stroke-width: 5px;
+        }
+        
+        .compass .zoom .chevron {
+          stroke-width: 4px;
+        }
+        
+        .compass .active .chevron, .compass .chevron.active {
+          stroke: #fff;
+        }
+        
+        .compass.active .active .direction {
+          fill: #999;
+        }
+        #YO26{
+          fill:#49006A
+        }
+        div#map {
+          position: relative;
+          border: solid 4px #ccc;
+          background: #eee;
+          height: 500px;
+        }
+    script(type='text/javascript')
+        $('#foo').slider().on('slide', function(ev){
+           console.log(ev)
+           tmp = moment("2013-05-23T00", "YYYY-MM-DD[T]HH").add('h', ev.value).format("YYYY-MM-DD[T]HH");;
+            console.log(tmp)
+            $("#mapStyleSheet").attr({href : "/CSS/"+tmp+".css"});
         });
+        
+        
+        $("div.slider.slider-horizontal").attr('style', 'width: 100%;')
+        var po = org.polymaps;
     
-    function load(e) {
-      for (var i = 0; i < e.features.length; i++) {
-        var feature = e.features[i];
-        feature.element.setAttribute("id", feature.data.properties.name);
-      }
-    }
-    
-    (function() {
-      var body = n$(document.body),
-          div = n$("#map").style("visibility", "visible"),
-          full = false;
-    
-      var svg = div.add("svg:svg")
-          .attr("width", 32)
-          .attr("height", 32)
-          .style("position", "absolute")
-          .style("right", "-16px")
-          .style("top", "-16px")
-          .style("visibility", "visible")
-          .on("mousedown", mousedown);
-    
-      svg.add("svg:circle")
-          .attr("cx", 16)
-          .attr("cy", 16)
-          .attr("r", 14)
-          .attr("fill", "#fff")
-          .attr("stroke", "#ccc")
-          .attr("stroke-width", 4)
-        .add("svg:title")
-          .text("Toggle fullscreen. (ESC)");
-    
-      var arrow = svg.add("svg:path")
-          .attr("transform", "translate(16,16)rotate(-45)scale(5)translate(-1.85,0)")
-          .attr("d", "M0,0L0,.5 2,.5 2,1.5 4,0 2,-1.5 2,-.5 0,-.5Z")
-          .attr("pointer-events", "none")
-          .attr("fill", "#aaa");
-    
-      window.addEventListener("keydown", keydown, false);
-    
-      function keydown(e) {
-        if (e.keyCode == 27 && full) mousedown();
-      }
-    
-      function mousedown() {
-        full = !full;
-    
-        if (full) {
-    
-          div
-              .style("position", "fixed")
-              .style("border-width", 0)
-              .style("width", "100%")
-              .style("height", "100%")
-              .style("top", 0)
-              .style("left", 0);
-    
-          svg
-              .style("position", "fixed")
-              .style("right", "16px")
-              .style("top", "16px");
-    
-          arrow
-              .attr("transform", "translate(16,16)rotate(135)scale(5)translate(-1.85,0)");
-    
-          body
-              .style("visibility", "hidden")
-              .style("overflow", "hidden");
-    
-        } else {
-    
-          div
-              .style("position", null)
-              .style("border-width", null)
-              .style("width", null)
-              .style("height", null)
-              .style("top", null)
-              .style("left", null);
-    
-          svg
+        var map = po.map()
+            .container(document.getElementById("map").appendChild(po.svg("svg")))
+            .center({lat: 53, lon: -1})
+            .zoom(5)
+            .zoomRange([3, 10])
+            .add(po.interact());
+        
+        map.add(po.image()
+            .url(po.url("http://{S}tile.cloudmade.com"
+            + "/1a1b06b230af4efdbb989ea99e9841af" // http://cloudmade.com/register
+            + "/20760/256/{Z}/{X}/{Y}.png")
+            .hosts(["a.", "b.", "c.", ""])));
+        
+        regional = po.geoJson()
+            .url("http://alcohol-twitter-map.herokuapp.com/Regional.json")
+            .on("load", load)
+            .id("county")
+            
+        national = po.geoJson()
+            .url("http://alcohol-twitter-map.herokuapp.com/National.json")
+            .on("load", load)
+            .id("county")
+        map.add(regional)
+        map.add(national);
+        var layerType = "national"
+        //map.add(po.geoJson()
+        //    .url("http://alcohol-twitter-map.herokuapp.com/{Z}/{X}/{Y}.json")
+        //    .id("state"));
+        
+        map.add(po.compass()
+            .pan("none"));
+        
+        map.on("move", function() {
+            // get the current zoom
+            var z = map.zoom();
+            if(z > 8){
+                console.log(z)
+                if(layerType != "regional"){
+                    console.log("regional")
+                    //map.remove(national);
+                    map.add(regional)
+                    layerType = "regional"
+                }
+            }
+            else{
+                if(layerType != "national"){
+                    console.log("national")
+                    map.remove(regional);
+                    map.add(national)
+                    layerType = "national"
+                }
+            }
+            
+            });
+        
+        function load(e) {
+          for (var i = 0; i < e.features.length; i++) {
+            var feature = e.features[i];
+            feature.element.setAttribute("id", feature.data.properties.name);
+          }
+        }
+        
+        (function() {
+          var body = n$(document.body),
+              div = n$("#map").style("visibility", "visible"),
+              full = false;
+        
+          var svg = div.add("svg:svg")
+              .attr("width", 32)
+              .attr("height", 32)
               .style("position", "absolute")
               .style("right", "-16px")
               .style("top", "-16px")
-    
-          arrow
-              .attr("transform", "translate(16,16)rotate(-45)scale(5)translate(-1.85,0)");
-    
-          body
-              .style("visibility", null)
-              .style("overflow", null);
-    
-        }
-    
-        map.resize();
-      }
-    })();
+              .style("visibility", "visible")
+              .on("mousedown", mousedown);
+        
+          svg.add("svg:circle")
+              .attr("cx", 16)
+              .attr("cy", 16)
+              .attr("r", 14)
+              .attr("fill", "#fff")
+              .attr("stroke", "#ccc")
+              .attr("stroke-width", 4)
+            .add("svg:title")
+              .text("Toggle fullscreen. (ESC)");
+        
+          var arrow = svg.add("svg:path")
+              .attr("transform", "translate(16,16)rotate(-45)scale(5)translate(-1.85,0)")
+              .attr("d", "M0,0L0,.5 2,.5 2,1.5 4,0 2,-1.5 2,-.5 0,-.5Z")
+              .attr("pointer-events", "none")
+              .attr("fill", "#aaa");
+        
+          window.addEventListener("keydown", keydown, false);
+        
+          function keydown(e) {
+            if (e.keyCode == 27 && full) mousedown();
+          }
+        
+          function mousedown() {
+            full = !full;
+        
+            if (full) {
+        
+              div
+                  .style("position", "fixed")
+                  .style("border-width", 0)
+                  .style("width", "100%")
+                  .style("height", "100%")
+                  .style("top", 0)
+                  .style("left", 0);
+        
+              svg
+                  .style("position", "fixed")
+                  .style("right", "16px")
+                  .style("top", "16px");
+        
+              arrow
+                  .attr("transform", "translate(16,16)rotate(135)scale(5)translate(-1.85,0)");
+        
+              body
+                  .style("visibility", "hidden")
+                  .style("overflow", "hidden");
+        
+            } else {
+        
+              div
+                  .style("position", null)
+                  .style("border-width", null)
+                  .style("width", null)
+                  .style("height", null)
+                  .style("top", null)
+                  .style("left", null);
+        
+              svg
+                  .style("position", "absolute")
+                  .style("right", "-16px")
+                  .style("top", "-16px")
+        
+              arrow
+                  .attr("transform", "translate(16,16)rotate(-45)scale(5)translate(-1.85,0)");
+        
+              body
+                  .style("visibility", null)
+                  .style("overflow", null);
+        
+            }
+        
+            map.resize();
+          }
+        })();
