@@ -157,7 +157,6 @@ block content
         
         map.on("move", function(e) {
         console.log(e) 
-        var z = map.zoom();
             var markerLayer = L.mapbox.markerLayer("http://http://alcohol-twitter-map.herokuapp.com/state/{z}/{x}/{y}.json").addTo(map);
         
         });
