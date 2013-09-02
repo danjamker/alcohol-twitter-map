@@ -28,6 +28,11 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+
+app.get('/geoJSON/{x}/{y}/{z}.json', function (req, res) {
+    res.sendfile("./GeoJSON/National.json");
+})
+
 app.get('/National.json', function (req, res) {
     res.sendfile("./GeoJSON/National.json");
 })
