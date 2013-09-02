@@ -6,7 +6,9 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "mongodb" : "1.1.11",
     "express": "3.3.4",
-    "jade": "*"
+    "jade": "*",
+    "geojson":*
   }
 }
