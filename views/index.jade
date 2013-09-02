@@ -130,15 +130,15 @@ block content
         
         var legend = 'Data from Robert Kieffer.';
         
-        document.getElementById('legend').onclick = function() {
-            if (this.className === 'active') {
-                map.legendControl.removeLegend(legend);
-                this.className = '';
-            } else {
-                map.legendControl.addLegend(legend);
-                this.className = 'active';
-            }
-        };
+        // document.getElementById('legend').onclick = function() {
+        //     if (this.className === 'active') {
+        //         map.legendControl.removeLegend(legend);
+        //         this.className = '';
+        //     } else {
+        //         map.legendControl.addLegend(legend);
+        //         this.className = 'active';
+        //     }
+        // };
         
         var fullscreenControl = new L.Control.Fullscreen().addTo(map);
         var hash = L.hash();
