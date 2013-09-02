@@ -53,3 +53,4 @@
 {"ts":1378153337891,"patch":[[{"diffs":[[0,"app.com/"],[1,"geoJSON/"],[0,"\"+z+\"/\"+"]],"start1":4070,"start2":4070,"length1":16,"length2":24}]],"length":7374,"saved":false}
 {"ts":1378153377830,"patch":[[{"diffs":[[0,"t\"]+\"/\"+"],[-1,"+"],[0,"c[0][\"lo"]],"start1":4102,"start2":4102,"length1":17,"length2":16},{"diffs":[[0,"[\"lon\"]+"],[-1,"+"],[0,"\"/\"+c[1]"]],"start1":4114,"start2":4114,"length1":17,"length2":16}]],"length":7372,"saved":false}
 {"ts":1378153530444,"patch":[[{"diffs":[[0,"   \n            "],[-1,"}"],[0,"\n            \n  "]],"start1":4228,"start2":4228,"length1":33,"length2":32}]],"length":7371,"saved":false}
+{"ts":1378153596930,"patch":[[{"diffs":[[0,"oom\n"],[-1,"            console.log(map.Bounds())\n"],[0,"    "]],"start1":3857,"start2":3857,"length1":46,"length2":8}]],"length":7333,"saved":false}
