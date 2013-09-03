@@ -7,9 +7,19 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
-  , path = require('path')
-  , mongo = require('mongodb');
-  
+  , path = require('path');
+
+  var Db = require('mongodb').Db,
+    MongoClient = require('mongodb').MongoClient,
+    Server = require('mongodb').Server,
+    ReplSetServers = require('mongodb').ReplSetServers,
+    ObjectID = require('mongodb').ObjectID,
+    Binary = require('mongodb').Binary,
+    GridStore = require('mongodb').GridStore,
+    Grid = require('mongodb').Grid,
+    Code = require('mongodb').Code,
+    BSON = require('mongodb').pure().BSON;
+
 var app = express();
 
 // all environments
@@ -30,37 +40,91 @@ if ('development' == app.get('env')) {
 
 
 
-var mongoUri =  mongodb://danjamker:apple@ds027668.mongolab.com:27668/geolocations
-
-mongo.Db.connect(mongoUri, function (err, db) {
- db.collection('UKPostcode').find({ loc :
-                  { $geoWithin :
-                    { $geometry :
-                      { type : "Polygon" ,
-                        coordinates : [ [
-                                          [ 0 , 0 ] ,
-                                          [ 3 , 6 ] ,
-                                          [ 6 , 1 ] ,
-                                          [ 0 , 0 ]
-                                        ] ]
-                } } } });
-});
 
 app.get('/', routes.index);
 
 app.get('/geoJSON/:x/:y/:e/:w/:q.json', function (req, res) {
     
-    mongo.Db.connect(mongoUri, function (err, db) {
-        var tmp = [[req.params.y,req.params.e],[req.params.w,req.params.q]]
-      db.collection('places').find({loc: {$within: {$box: tmp}}).toArray(function(err, docs) {
-        if(err) return console.dir(err)
-    
-        assert.equal(docs.length, 2);
-      });
-      
-});
-    
-    res.sendfile("./GeoJSON/National.json");
+    query = {
+    "loc": {
+        "$geoWithin": {
+            "$geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            req.params.e,req.params.y
+                        ],
+                        [
+                            req.params.e,req.params.w
+                        ],
+                        [
+                           req.params.q,req.params.w
+                        ],
+                        [
+                            req.params.q,req.params.y
+                        ],                        
+                        [
+                            req.params.e,req.params.y
+                        ]
+                    ]
+                ]
+            }
+        }
+    }
+};
+      var uri =   "mongodb://danjamker:apple@ds027668.mongolab.com:27668/geolocations";
+      MongoClient.connect(uri, { server: { auto_reconnect: true } }, function (err, db) {
+          console.log(err)
+          db.collection('UKPostcode').find({
+              loc: {
+                  $geoWithin: {
+                      $geometry: {
+                          type: "Polygon",
+                          coordinates: [
+                              [
+                                  [
+                                      parseFloat(req.params.e),parseFloat(req.params.y)
+                                  ],
+                                  [
+                                      parseFloat(req.params.e),parseFloat(req.params.w)
+                                  ],
+                                  [
+                                     parseFloat(req.params.q),parseFloat(req.params.w)
+                                  ],
+                                  [
+                                      parseFloat(req.params.q),parseFloat(req.params.y)
+                                  ],                        
+                                  [
+                                      parseFloat(req.params.e),parseFloat(req.params.y)
+                                  ]
+                              ]
+                          ]
+                      }
+                  }
+              }
+          }).toArray(function(err, docs) {
+
+                lols = []
+                for (var i = 0; i < docs.length; i++) {
+                  tmp = {"type":"Feature",
+                          "geometry":{"type":"Polygon",
+                            "coordinates":docs[i].loc.coordinates},
+                            "properties":{"id":docs[i].id}
+                          }
+                          lols.push(tmp)
+
+                  console.log(docs[i].id);
+    //Do something
+                }
+                tmp = { "type": "FeatureCollection",
+                        "features":lols
+                      }
+                res.json(tmp);
+              });  
+            });
+     
+    //res.sendfile("./GeoJSON/National.json");
 })
 
 app.get('/National.json', function (req, res) {

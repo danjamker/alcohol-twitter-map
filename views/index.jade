@@ -117,18 +117,18 @@ block content
             + "/20760/256/{Z}/{X}/{Y}.png")
             .hosts(["a.", "b.", "c.", ""])));
         
-        regional = po.geoJson()
-            .url("http://alcohol-twitter-map.herokuapp.com/Regional.json")
-            .on("load", load)
-            .id("county")
+        //regional = po.geoJson()
+        //    .url("/Regional.json")
+        //    .on("load", load)
+        //    .id("county")
+        //    
+        //national = po.geoJson()
+        //    .url("/National.json")
+        //    .on("load", load)
+        //    .id("county")
             
-        national = po.geoJson()
-            .url("http://alcohol-twitter-map.herokuapp.com/National.json")
-            .on("load", load)
-            .id("county")
-            
-        map.add(regional)
-        map.add(national);
+        //map.add(regional)
+        //map.add(national);
         var layerType = "national"
 
         
@@ -138,12 +138,14 @@ block content
         map.on("move", function() {
             // get the current zoom
             var z = map.zoom();
-            var c = map.centerRange();
-            
+            var c = map.extent();
+            console.log(c)
             national = po.geoJson()
-            .url("http://alcohol-twitter-map.herokuapp.com/geoJSON/"+z+"/"+c[0]["lat"]+"/"+c[0]["lon"]+"/"+c[1]["lat"]+"/"+c[1]["lon"]+".json")
+            .url("/geoJSON/"+z+"/"+c[0]["lat"]+"/"+c[0]["lon"]+"/"+c[1]["lat"]+"/"+c[1]["lon"]+".json")
             .on("load", load)
             .id("county")
+
+             map.add(national)
             
             
             
