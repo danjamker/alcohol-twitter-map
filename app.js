@@ -133,6 +133,13 @@ app.get('/', function (req, res){
           });
 });
 
+app.get('/about', function (req, res){
+ res.render('about', {
+              menu:"about"
+          });
+});
+
+
 app.get('/geoJSON/:x/:y/:e/:w/:q.json', function (req, res) {
     
     query = {
