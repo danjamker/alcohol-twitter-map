@@ -1,0 +1,36 @@
+extends layout
+
+block content
+	h1= title
+
+	canvas#myChart(width='400', height='400')
+
+	script(src='/javascripts/Chart.min.js')
+	script(type='text/javascript')
+
+		function fitToContainer(canvas){
+			canvas.style.width='100%';
+			canvas.style.height='100%';
+			canvas.width  = canvas.offsetWidth;
+			canvas.height = canvas.offsetHeight;
+		}
+
+		var ctx = document.getElementById('myChart').getContext('2d');
+		fitToContainer(document.getElementById('myChart'))
+		var data = {
+			labels : !{days},
+			datasets : [
+				{
+					fillColor : "rgba(220,220,220,0.5)",
+					strokeColor : "rgba(220,220,220,1)",
+					pointColor : "rgba(220,220,220,1)",
+					pointStrokeColor : "#fff",
+					data : [#{scores}]
+				}
+			]
+		}
+
+		Line = new Chart(ctx).Line(data, { scaleOverride : true,
+			scaleSteps : 25,
+			scaleStepWidth : 0.001,
+			scaleStartValue : 0 });
