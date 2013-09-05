@@ -246,7 +246,7 @@ app.get('/:postcode', function (req, res) {
           }
           // Do something with element i.
         
-        wordProvider.findAll(req.params.postcode, function(errors, word){
+        wordProvider.findAll(req.params.postcode.replace(/\s+/g, '-'), function(errors, word){
               
               tfvodka = []
               tfdrunk = []
