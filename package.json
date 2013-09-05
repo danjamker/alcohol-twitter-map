@@ -6,7 +6,7 @@
     "start": "node app.js"
   },
     "engines": {
-     "node": "0.10.17",
+     "node": "0.10.15",
    "npm": "1.1.x"
    },
   "dependencies": {
