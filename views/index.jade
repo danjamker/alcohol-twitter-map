@@ -1,10 +1,12 @@
 extends layout
 block content
-    h1#time Thursday, May 23rd 2013, 6:00:00 am
+    center
+      h1#time Thursday, May 23rd 2013, 6:00:00 am
     #map
       input(type="text", id="foo", class="container-narrow", value="", data-slider-min="0", data-slider-max="336", data-slider-step="1", data-slider-value="0", data-slider-orientation="horizontal", data-slider-selection="after",data-slider-tooltip="hide")
-    canvas#myCanvas(width='200', height='100')
-
+    br
+    .panel.panel-default
+      .panel-body This is an interactive map which is showing the comparitive consumption rates of alcohol in the UK through the monitoring of twitter over a t week period. Zoom in and on aresa to see a more detailed break down, looking at keyterm distribution, and frequancies of words.
     script(src='/polymaps/polymaps.min.js')
     script(src='/javascripts/nns.min.js')
     script(src='/javascripts/moment.min.js')
@@ -20,6 +22,8 @@ block content
         svg {
           display: block;
           overflow: hidden;
+          height: 490px;
+
         }
         
         #county path {
@@ -85,21 +89,10 @@ block content
           position: relative;
           border: solid 4px #ccc;
           background: #eee;
-          height: 50%;
+          height: 519px;
         }
     script(type='text/javascript')
-        var c=document.getElementById("myCanvas");
-        var ctx=c.getContext("2d");
 
-        // Create gradient
-        var grd=ctx.createLinearGradient(0,0,200,0);
-        grd.addColorStop(0,"blue");
-        grd.addColorStop(0.5,"red");
-        grd.addColorStop(1,"green");
-
-        // Fill with gradient
-        ctx.fillStyle=grd;
-        ctx.fillRect(10,10,150,80);
         $('#foo').slider().on('slide', function(ev){
           console.log(ev)
           tmp = moment("2013-05-23T00", "YYYY-MM-DD[T]HH").add('h', ev.value).format("YYYY-MM-DD[T]HH");;
@@ -116,7 +109,7 @@ block content
 
         var map = po.map()
             .container(document.getElementById("map").appendChild(po.svg("svg")))
-            .center({lat: 53, lon: -1})
+            .center({lat: 54, lon: 0})
             .zoom(5)
             .zoomRange([3, 10])
             .add(po.interact());

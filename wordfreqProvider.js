@@ -3,10 +3,17 @@ var Connection = require('mongodb').Connection;
 var Server = require('mongodb').Server;
 var BSON = require('mongodb').BSON;
 var ObjectID = require('mongodb').ObjectID;
+var MongoClient = require('mongodb').MongoClient;
 
 WordProvider = function(host, port) {
-  this.db= new Db('hadoopOuput', new Server(host, port, {safe: true}, {auto_reconnect: true}, {}));
-  this.db.open(function(){});
+  this.db= new Db('geolocations', new Server("ds027668.mongolab.com", 27668, {auto_reconnect: true}, {}));
+  //this.db =  MongoClient.connect("mongodb://danjamker:apple@ds027668.mongolab.com:27668/geolocations", { server: { auto_reconnect: true } })
+  this.db.open(function(err, db){
+    db.authenticate('danjamker', 'apple', function(err, result) {
+      console.log(err)
+    });
+  });
+
 };
 
 WordProvider.prototype.getCollection = function(callback) {
