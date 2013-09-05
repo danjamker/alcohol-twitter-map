@@ -20,8 +20,11 @@ var express = require('express')
     GridStore = require('mongodb').GridStore,
     Grid = require('mongodb').Grid,
     Code = require('mongodb').Code,
-    BSON = require('mongodb').pure().BSON
-  , DataProvider = require('./dataprovider').DataProvider;
+    BSON = require('mongodb').pure().BSON,
+    DataProvider = require('./dataprovider').DataProvider,
+    WordProvider = require('./wordfreqProvider').WordProvider,
+    PostCodeProvider = require('./postcodeProvider').PostCodeProvider;
+
 
 var sort = function (list) {
  
@@ -37,9 +40,47 @@ var sort = function (list) {
  
         for (var j = 0, swapping, endIndex = len - i; j < endIndex; j++) {
             comparisons++;
-            console.log(list[j])
-            console.log(moment(list[i]).isBefore(list[i + 1]))
+
             if (moment(list[j][0]).isAfter(list[j + 1][0])) {
+         
+                swapping = list[j];
+ 
+                list[j] = list[j + 1];
+                list[j + 1] = swapping;
+ 
+                swaps++;
+                hasSwap = true;
+            };
+        };
+ 
+        if (!hasSwap) {
+            break;
+        }
+    }
+ 
+    console.log("--Bubble Sort--")
+    console.log("Comparisons: " + comparisons);
+    console.log("Swaps: " + swaps);
+                 
+    return list;
+};
+
+var sortd = function (list) {
+ 
+    var comparisons = 0,
+        swaps = 0,
+        endIndex = 0,
+        len = list.length - 1,
+        hasSwap = true;
+ 
+    for (var i = 0; i < len; i++) {
+ 
+        hasSwap = false;
+ 
+        for (var j = 0, swapping, endIndex = len - i; j < endIndex; j++) {
+            comparisons++;
+
+            if (moment(list[j]["time"]).isAfter(list[j + 1]["time"])) {
          
                 swapping = list[j];
  
@@ -76,6 +117,7 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 var dataProvider = new DataProvider('localhost', 27017);
+var wordProvider = new WordProvider('localhost', 27017);
 
 // development only
 if ('development' == app.get('env')) {
@@ -85,7 +127,11 @@ if ('development' == app.get('env')) {
 
 
 
-app.get('/', routes.index);
+app.get('/', function (req, res){
+ res.render('index', {
+              menu:"index"
+          });
+});
 
 app.get('/geoJSON/:x/:y/:e/:w/:q.json', function (req, res) {
     
@@ -119,7 +165,6 @@ app.get('/geoJSON/:x/:y/:e/:w/:q.json', function (req, res) {
 };
       var uri =   "mongodb://danjamker:apple@ds027668.mongolab.com:27668/geolocations";
       MongoClient.connect(uri, { server: { auto_reconnect: true } }, function (err, db) {
-          console.log(err)
           db.collection('UKPostcode').find({
               loc: {
                   $geoWithin: {
@@ -158,7 +203,6 @@ app.get('/geoJSON/:x/:y/:e/:w/:q.json', function (req, res) {
                           }
                           lols.push(tmp)
 
-                  console.log(docs[i].id);
     //Do something
                 }
                 tmp = { "type": "FeatureCollection",
@@ -179,8 +223,9 @@ app.get('/Regional.json', function (req, res) {
 })
 
 app.get('/:postcode', function (req, res) {
-  console.log(req.params.postcode)
-  dataProvider.findAll(req.params.postcode, function(error, emps){
+  var postcodeProvider = new PostCodeProvider('mongodb://danjamker:apple@ds027668.mongolab.com:27668');
+
+  dataProvider.findAll(req.params.postcode.replace(/\s+/g, '-'), function(error, emps){
 
         data = []
         scores = []
@@ -188,7 +233,6 @@ app.get('/:postcode', function (req, res) {
         for (var i = 0; i < emps.length; i++) {
           element = emps[i];
           if(element.type == "daily"){
-            console.log(element.time)
             data.push([element.time,element.score])
           }
         }
@@ -202,12 +246,127 @@ app.get('/:postcode', function (req, res) {
           }
           // Do something with element i.
         
+        wordProvider.findAll(req.params.postcode, function(errors, word){
+              
+              tfvodka = []
+              tfdrunk = []
+              tfhungover = []
+              tfhangover = []
+              tfwasted = []
+              tfpissed = []
+              tfwine = []
 
-        res.render('postcode', {
+              tpvodka = []
+              tpdrunk = []
+              tphungover = []
+              tphangover = []
+              tpwasted = []
+              tppissed = []
+              tpwine = []
+
+              tweetCount = []
+
+              list = sortd(word)
+
+              for(var i = 0; i < list.length; i++){
+                tfvodka.push(list[i]["termfreq"]["vodka"])
+                tfdrunk.push(list[i]["termfreq"]["drunk"])
+                tfhungover.push( list[i]["termfreq"]["hungover"])
+                tfhangover.push(list[i]["termfreq"]["hangover"])
+                tfwasted.push(list[i]["termfreq"]["wasted"])
+                tfpissed.push(list[i]["termfreq"]["pissed"])
+                tfwine.push(list[i]["termfreq"]["wine"])
+
+                tpvodka.push(list[i]["termprob"]["vodka"])
+                tpdrunk.push(list[i]["termprob"]["drunk"])
+                tphungover.push(list[i]["termprob"]["hungover"])
+                tphangover.push(list[i]["termprob"]["hangover"])
+                tpwasted.push(list[i]["termprob"]["wasted"])
+                tppissed.push(list[i]["termprob"]["pissed"])
+                tpwine.push(list[i]["termprob"]["wine"])
+
+                tweetCount.push(list[i]["tweetCount"])
+              }
+
+              var postcode = "";
+              var postcodeRegon = "";
+              var regon = "";
+             
+
+              var uri =   "mongodb://danjamker:apple@ds027668.mongolab.com:27668/geolocations";
+      MongoClient.connect(uri, { server: { auto_reconnect: true } }, function (err, db) {
+          db.collection('Postcodelookup').find({
+            $or : 
+            [{ postRegon:req.params.postcode },{postcode:req.params.postcode},{postcoderegon:req.params.postcode}]
+          }).toArray(function(err, docs){
+
+              vara = ""
+              varb = ""
+              varc = ""
+
+              varx = false
+              vary = false
+              varz = false
+              for(var j = 0; j < docs.length ; j++){
+                console.log(docs[j])
+                if(req.params.postcode == docs[j]["postRegon"]){
+                  varx = true
+                }
+                if(req.params.postcode == docs[j]["postcode"]){
+                  vary = true
+                }                
+                if(req.params.postcode == docs[j]["postcoderegon"]){
+                  varz = true
+                }
+                vara = docs[j]["postRegon"]
+                varb = docs[j]["postcode"]
+                varc = docs[j]["postcoderegon"]
+
+              }
+
+              res.render('postcode', {
               title: req.params.postcode,
               days: JSON.stringify(tmp),
-              scores: scores
-          });
+              scores: scores,
+              menu:"postcode",
+              tfvodka:tfvodka,
+              tfdrunk :tfdrunk,
+              tfhungover: tfhungover,
+              tfhangover:tfhangover,
+              tfwasted :tfwasted,
+              tfpissed :tfpissed,
+              tfwine :tfwine,
+
+              tpvodka:tpvodka,
+              tpdrunk :tpdrunk,
+              tphungover: tphungover,
+              tphangover :tphangover,
+              tpwasted :tpwasted,
+              tppissed :tppissed,
+              tpwine :tpwine,
+              tweetCount:tweetCount,
+              vara:vara,
+              varb:varb,
+              varc:varc,
+              varx:varx,
+              vary:vary,
+              varz:varz 
+
+
+              })
+          })});
+              
+
+
+
+
+
+
+
+
+
+
+        });
     });
 })
 

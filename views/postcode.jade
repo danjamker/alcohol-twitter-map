@@ -1,12 +1,103 @@
 extends layout
 
 block content
-	h1= title
+	ol.breadcrumb
+		if vara == title
+			li.active= title
+		if varb == title
+			li
+				a(href='/#{vara}') #{vara}
+			li
+				a(href='/#{varc}') #{varc}
+			li.active= title
+		if varc == title
+			li
+				a(href='/#{vara}') #{vara}
+			li.active= title
+			
 
-	canvas#myChart(width='400', height='400')
+	ul.nav.nav-tabs#myTab
+		li#one
+			a(href='#home', data-toggle='tab') Twitter Alcohol Score
+		li#two
+			a(href='#profile', data-toggle='tab') Term Frequancy
+		li#three
+			a(href='#messages', data-toggle='tab') Term Probability
+		li#four
+			a(href='#settings', data-toggle='tab') Total Tweets
+
+	.tab-content
+		#home.tab-pane.active
+
+		#profile.tab-pane 
+
+		#messages.tab-pane
+
+		#settings.tab-pane 
+
+
+	#myChartDiv
+		canvas#myChart(width='400', height='400')
+		#myChartledgend.legend
+	#wfdiv
+		canvas#wf(width='400', height='400')
+		#wfdivledgend.legend
+	#wpdiv
+		canvas#wp(width='400', height='400')
+		#wpdivledgend.legend
+	#tdiv
+		canvas#tt(width='400', height='400')
+		#tdivledgend.legend
 
 	script(src='/javascripts/Chart.min.js')
+	script(src='/javascripts/legend.js')
 	script(type='text/javascript')
+		function showone(){
+			console.log("Daniel");
+			$("#myChartDiv").show()
+			$("#wfdiv").hide()
+			$("#wpdiv").hide()
+			$("#tdiv").hide()
+
+		}
+		function showtwo(){
+			console.log("James")
+			$("#myChartDiv").hide()
+			$("#wfdiv").show()
+			$("#wpdiv").hide()
+			$("#tdiv").hide()
+
+		}
+		function showthree(){
+			console.log("Kershaw")
+			$("#myChartDiv").hide()
+			$("#wfdiv").hide()
+			$("#wpdiv").show()
+			$("#tdiv").hide()
+
+		}
+		function showfour(){
+			console.log("kershaw")
+			$("#myChartDiv").hide()
+			$("#wfdiv").hide()
+			$("#wpdiv").hide()
+			$("#tdiv").show()
+
+		}
+
+		$(function () {
+			$('#myTab a:first').tab('show')
+			$("#myChartDiv").show()
+			$("#wfdiv").hide()
+			$("#wpdiv").hide()
+			$("#tdiv").hide()
+		})
+
+		$('#one').click(function(){showone()});
+		$('#two').click(function(){showtwo()});
+		$('#three').click(function(){showthree()});
+		$('#four').click(function(){showfour()});
+
 
 		function fitToContainer(canvas){
 			canvas.style.width='100%';
@@ -25,7 +116,8 @@ block content
 					strokeColor : "rgba(220,220,220,1)",
 					pointColor : "rgba(220,220,220,1)",
 					pointStrokeColor : "#fff",
-					data : [#{scores}]
+					data : [#{scores}],
+					title: "Twitter Alcohol Score"
 				}
 			]
 		}
@@ -34,3 +126,169 @@ block content
 			scaleSteps : 25,
 			scaleStepWidth : 0.001,
 			scaleStartValue : 0 });
+		legend(document.getElementById("myChartledgend"), data);
+
+		var ctx = document.getElementById('wf').getContext('2d');
+		fitToContainer(document.getElementById('wf'))
+		var data = {
+			labels : !{days},
+			datasets : [
+				{
+					fillColor : "rgba(220,220,220,0.5)",
+					strokeColor : "rgba(220,220,220,1)",
+					pointColor : "rgba(220,220,220,1)",
+					pointStrokeColor : "#fff",
+					data : [#{tfvodka}], 
+					title:"Vodka"
+				},
+								{
+					fillColor : "rgba(151,187,205,0.5)",
+					strokeColor : "rgba(151,187,205,1)",
+					pointColor : "rgba(151,187,205,1)",
+					pointStrokeColor : "#fff",
+					data : [#{tfdrunk}], 
+					title:"Drunk"
+				},
+								{
+					fillColor : "rgba(255,0,0,0.5)",
+					strokeColor : "rgba(255,0,0,1)",
+					pointColor : "rgba(255,0,0,1)",
+					pointStrokeColor : "#fff",
+					data : [#{tfhungover}],
+					title:"Hungover"
+				},								{
+					fillColor : "rgba(28,92,89,0.5)",
+					strokeColor : "rgba(28,92,89,53,1)",
+					pointColor : "rgba(28,92,89,1)",
+					pointStrokeColor : "#fff",
+					data : [#{tfwine}],
+					title:"Wine"
+				},
+								{
+					fillColor : "rgba(170,159,135,0.5)",
+					strokeColor : "rgba(170,159,135,1)",
+					pointColor : "rgba(170,159,135,1)",
+					pointStrokeColor : "#fff",
+					data : [#{tfhangover}],
+					title:"Hangover"
+				},
+								{
+					fillColor : "rgba(208,219,53,0.5)",
+					strokeColor : "rgba(208,219,53,1)",
+					pointColor : "rgba(208,219,53,1)",
+					pointStrokeColor : "#fff",
+					data : [#{tfpissed}],
+					title:"Pissed"
+				},
+								{
+					fillColor : "rgba(223,207,187,0.5)",
+					strokeColor : "rgba(223,207,187,1)",
+					pointColor : "rgba(223,207,187,1)",
+					pointStrokeColor : "#fff",
+					data : [#{tfwasted}],
+					title:"Wasted"
+				}
+			]
+		}
+
+		Line = new Chart(ctx).Line(data, { scaleOverride : true,
+			scaleSteps : 25,
+			scaleStepWidth : 2,
+			scaleStartValue : 0 });
+		legend(document.getElementById("wfdivledgend"), data);
+
+
+		var ctx = document.getElementById('wp').getContext('2d');
+		fitToContainer(document.getElementById('wp'))
+		var data = {
+			labels : !{days},
+			datasets : [
+				{
+					fillColor : "rgba(220,220,220,0.5)",
+					strokeColor : "rgba(220,220,220,1)",
+					pointColor : "rgba(220,220,220,1)",
+					pointStrokeColor : "#fff",
+					data : [#{tpvodka}],
+					title:"Vodka"
+				},
+								{
+					fillColor : "rgba(151,187,205,0.5)",
+					strokeColor : "rgba(151,187,205,1)",
+					pointColor : "rgba(151,187,205,1)",
+					pointStrokeColor : "#fff",
+					data : [#{tpdrunk}],
+					title:"Drunk"
+				},
+								{
+					fillColor : "rgba(255,0,0,0.5)",
+					strokeColor : "rgba(255,0,0,1)",
+					pointColor : "rgba(255,0,0,1)",
+					pointStrokeColor : "#fff",
+					data : [#{tphungover}],
+					title:"hungover"
+				},								{
+					fillColor : "rgba(28,92,89,0.5)",
+					strokeColor : "rgba(28,92,89,53,1)",
+					pointColor : "rgba(28,92,89,1)",
+					pointStrokeColor : "#fff",
+					data : [#{tpwine}],
+					title:"Wine"
+				},
+								{
+					fillColor : "rgba(170,159,135,0.5)",
+					strokeColor : "rgba(170,159,135,1)",
+					pointColor : "rgba(170,159,135,1)",
+					pointStrokeColor : "#fff",
+					data : [#{tphangover}],
+					title:"Hangover"
+				},
+								{
+					fillColor : "rgba(208,219,53,0.5)",
+					strokeColor : "rgba(208,219,53,1)",
+					pointColor : "rgba(208,219,53,1)",
+					pointStrokeColor : "#fff",
+					data : [#{tppissed}],
+					title:"Pissed"
+				},
+								{
+					fillColor : "rgba(223,207,187,0.5)",
+					strokeColor : "rgba(223,207,187,1)",
+					pointColor : "rgba(223,207,187,1)",
+					pointStrokeColor : "#fff",
+					data : [#{tpwasted}],
+					title: "Wasted"
+				}
+			]
+		}
+
+		Line = new Chart(ctx).Line(data, { scaleOverride : true,
+			scaleSteps : 25,
+			scaleStepWidth : 0.00002,
+			scaleStartValue : 0 });
+		legend(document.getElementById("wpdivledgend"), data);
+
+
+
+
+		var ctx = document.getElementById('tt').getContext('2d');
+		fitToContainer(document.getElementById('tt'))
+		var data = {
+			labels : !{days},
+			datasets : [
+				{
+					fillColor : "rgba(220,220,220,0.5)",
+					strokeColor : "rgba(220,220,220,1)",
+					pointColor : "rgba(220,220,220,1)",
+					pointStrokeColor : "#fff",
+					data : [#{tweetCount}],
+					title:"Tweet Count"
+				}
+			]
+		}
+
+		Line = new Chart(ctx).Line(data, { scaleOverride : true,
+			scaleSteps : 10,
+			scaleStepWidth : 1000,
+			scaleStartValue : 0 });
+		legend(document.getElementById("tdivledgend"), data);
+

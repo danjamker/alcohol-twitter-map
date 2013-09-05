@@ -148,7 +148,7 @@ block content
 
               layer = po.geoJson()
               .url("/geoJSON/"+z+"/"+c[0]["lat"]+"/"+c[0]["lon"]+"/"+c[1]["lat"]+"/"+c[1]["lon"]+".json")
-              .on("load", load)
+              .on("load", loads)
               .id("county")
               view = c;
               if(layeron != null){
@@ -179,6 +179,17 @@ block content
           }
         }
         
+        function loads(e) {
+          for (var i = 0; i < e.features.length; i++) {
+            var feature = e.features[i];
+            feature.element.setAttribute("id", feature.data.properties.id);
+                feature.element.addEventListener("mousedown", function(e){  
+                  console.log($('this'))
+                  window.location.href=$(this).attr('id');
+                }, false); 
+          }
+        }
+
         (function() {
           var body = n$("#wrap"),
               div = n$("#map").style("visibility", "visible"),

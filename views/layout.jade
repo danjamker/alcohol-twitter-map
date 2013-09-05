@@ -11,6 +11,11 @@ html
         meta(name='viewport', content='width=device-width, initial-scale=1.0')
         meta(name='description', content='')
         meta(name='author', content='Daniel Kershaw')
+        script(type='text/javascript')
+            function go(){
+                
+                window.location.href=$("#postcodefeild").val();
+            }
         
     body
         #wrap
@@ -21,13 +26,40 @@ html
                             span.icon-bar
                             span.icon-bar
                             span.icon-bar
-                        a.navbar-brand(href='#') Alcoholic Tweets
+                        a.navbar-brand(href='/') Alcoholic Tweets
                     .collapse.navbar-collapse
                         ul.nav.navbar-nav
-                            li.active
-                                a(href='/') Map
-                            li
-                                a(href='/LA1') Postcode
+                            if (menu=="index")
+                                li.active
+                                    a(href="/") Map
+                            else
+                                li
+                                    a(href="/") Map
+                            if (menu=="postcode")
+                                li.active.dropdown
+                                    a.dropdown-toggle(href='#', data-toggle='dropdown') Postcode
+                                        b.caret
+                                    ul.dropdown-menu
+                                        li
+                                            form.navbar-form.navbar-left(role='search', onsubmit='go(); return false;')
+                                                .form-group
+                                                    input#postcodefeild.form-control(type='text', placeholder='e.g. LA')
+                                                    p
+                                                    center
+                                                        button.btn.btn-default(type='') Submit
+
+                            else
+                                li.dropdown
+                                    a.dropdown-toggle(href='#', data-toggle='dropdown') Postcode
+                                        b.caret
+                                    ul.dropdown-menu
+                                        li
+                                            form.navbar-form.navbar-left(role='search', onsubmit='go(); return false;')
+                                                .form-group
+                                                    input#postcodefeild.form-control(type='text', placeholder='e.g. LA')
+                                                    p
+                                                    center
+                                                        button.btn.btn-default(type='') Submit
                             li
                                 a(href='https://www.dropbox.com/s/8eku9pa1lrgqqx1/Alcoholic%20Tweets.pdf') Paper
                             li
@@ -35,8 +67,8 @@ html
 
             .container     
                 block content
-            
+            br
             
         #footer
             .container
-                p © Daniel Kershaw 2013
+                p.text-muted.credit © Daniel Kershaw 2013
