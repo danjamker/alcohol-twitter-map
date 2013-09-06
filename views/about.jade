@@ -7,18 +7,18 @@ block content
 
     h1 Implementation
     ul
-        li Map - The map was one of the more ticker parts of the system to impliment. This was implimented by using 
-        a(href='http://www.polymaps.com/') Polymaps 
-        for the UI and the background maps. Over this was layers a GeoJSON vector maps, for both a national and regonal scales, however for local map which depected the boundries of each postcode there where so many vectores that the file was over 17Mb. For this reason each vectore was imported into a 
-        a(href='http://www.mongobd.com') MongoDB 
-        hosted on 
-        a(href='http://www.mongolab.com') MongoLab
-        . The reson for using a MongoDB soultion was the abbility to index all the vector points and used them for searching. This mean that from the browser a message is sent to the server saying what the browser can see, then the server only return what is within the view of polymaps. This reduced the size of each packet. The original files can be download from here
-        ul
-            li 
-                a(href="/National.json") Natinoal
-            li 
-                a(href="/Regonal.json") Regonal
+        li The map was one of the more ticker parts of the system to impliment. This was implimented by using 
+            a(href='http://www.polymaps.com/') Polymaps 
+            for the UI and the background maps. Over this was layers a GeoJSON vector maps, for both a national and regonal scales, however for local map which depected the boundries of each postcode there where so many vectores that the file was over 17Mb. For this reason each vectore was imported into a 
+            a(href='http://www.mongobd.com') MongoDB 
+            hosted on 
+            a(href='http://www.mongolab.com') MongoLab
+            . The reson for using a MongoDB soultion was the abbility to index all the vector points and used them for searching. This mean that from the browser a message is sent to the server saying what the browser can see, then the server only return what is within the view of polymaps. This reduced the size of each packet. The original files can be download from here
+            ul
+                li 
+                    a(href="/National.json") Natinoal
+                li 
+                    a(href="/Regonal.json") Regonal
 
         li The server was writen in Node.js using the Express frame work for routing and rendering of pages. The theme and structure of each pages was based on the 
         a(href='http://www.getbootstrap.com') Bootstrap 
