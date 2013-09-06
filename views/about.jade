@@ -1,7 +1,9 @@
 extends layout
 block content
     h1 About this project
-    p Monitoring the rates of consumption of alcohol across the UK is a timely problem with an ever-increasing consumption levels, and calls from public service about the effect it is having on people and society. However methods that are currently utilised are costly, time consuming, and don’t supply detailed enough results as they look at user  rather than user patters of drinking. In this paper we look into the abilities of using Twitter (a popular micro blogging site) to monitor rate of alcohol consumption in regions across the UK. Looking into variation of term usage, along with trends within a specific key word set. This study was performed over a 2 week windows; analyzing textual markers in over 17 millon tweets all geo located within the UK. A score was given to each tweet based on the number of markers used and the sum of all markers in the tweet. Scores form different geo-locations sets and time granularities were compared to the ground truth data from the Health & Social Care Information Centre (HSCIC) weekly alcohol consumption pattern. We managed to get high linear correlations between the ground truth and the twitter alcohol score, with highs of 0.87 with a p-value of less than 0.01 for regions in the UK. The near real-time monitoring of alcohol-consumption, and the limited overheads that the use of social media incurs, means that such a method could be used to inform decisions that in the past have relied purely on slow and laborious data collection methods (e.g. questionnaires). Different variations in language were detected over time and regions, with lags in certain words been detected, e.g. 'drunk' appearing at midnight, and 'hungover' appearing from around midday.
+    p Monitoring the rates of consumption of alcohol across the UK is a timely problem with an ever-increasing consumption levels, and calls from public service about the effect it is having on people and society. However methods that are currently utilised are costly, time consuming, and don’t supply detailed enough results as they look at user  rather than user patters of drinking. 
+    p In this paper we look into the abilities of using Twitter (a popular micro blogging site) to monitor rate of alcohol consumption in regions across the UK. Looking into variation of term usage, along with trends within a specific key word set. This study was performed over a 2 week windows; analyzing textual markers in over 17 millon tweets all geo located within the UK. A score was given to each tweet based on the number of markers used and the sum of all markers in the tweet. Scores form different geo-locations sets and time granularities were compared to the ground truth data from the Health & Social Care Information Centre (HSCIC) weekly alcohol consumption pattern. We managed to get high linear correlations between the ground truth and the twitter alcohol score, with highs of 0.87 with a p-value of less than 0.01 for regions in the UK. 
+    p The near real-time monitoring of alcohol-consumption, and the limited overheads that the use of social media incurs, means that such a method could be used to inform decisions that in the past have relied purely on slow and laborious data collection methods (e.g. questionnaires). Different variations in language were detected over time and regions, with lags in certain words been detected, e.g. 'drunk' appearing at midnight, and 'hungover' appearing from around midday.
 
     h1 Implementation
     ul
@@ -25,3 +27,10 @@ block content
         Both of which made the development of the website quick and simple as my background is not in CSS of website layout. Hosting was provided by 
         a(href='http://www.heroku.com') Heroku 
         which offer 36hrs free hositng a month, and allows for easy deplyment through git push, and fully suports the Node.js system. 
+
+        li Data Processing was impliment in 
+        a(href="http://hadoop.apache.org/")Haddop 
+        | which iterated over the 17 million tweets. The map andredce part was writen in 
+        a(href="http://www.python.org")Python 
+        | to usterlise the NLTK framework for text analises, which alloed for the extraction of collocation, and removal of stop word. Sample of all the code can be found in my 
+        a(href="http://www.github.com/danjamker") Github
