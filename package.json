@@ -6,11 +6,11 @@
     "start": "node app.js"
   },
     "engines": {
-     "node": "0.10.15",
-   "npm": "1.1.x"
+     "node": "0.10.x",
+   "npm": "1.2.x"
    },
   "dependencies": {
-    "mongodb" : "1.2",
+    "mongodb" : "*",
     "express": "3.3.4",
     "jade": "*",
     "moment":"*"
