@@ -8,7 +8,13 @@ block content
       input(type="text", id="foo", class="container-narrow", value="", data-slider-min="0", data-slider-max="336", data-slider-step="1", data-slider-value="0", data-slider-orientation="horizontal", data-slider-selection="after",data-slider-tooltip="hide")
     br
     .panel.panel-default
-      .panel-body This is an interactive map which is showing the comparitive consumption rates of alcohol in the UK through the monitoring of twitter over a t week period. Zoom in and on aresa to see a more detailed break down, looking at keyterm distribution, and frequancies of words.
+      .panel-body 
+        p
+            span.label.label-success Green
+            span.label.label-primary Blue
+
+        p
+            | This is an interactive map which is showing the comparitive consumption rates of alcohol in the UK through the monitoring of twitter over a t week period. Zoom in and on aresa to see a more detailed break down, looking at keyterm distribution, and frequancies of words.
     script(src='/polymaps/polymaps.min.js')
     script(src='/javascripts/nns.min.js')
     script(src='/javascripts/moment.min.js')

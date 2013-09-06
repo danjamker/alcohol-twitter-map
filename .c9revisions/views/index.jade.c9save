@@ -59,3 +59,4 @@
 {"ts":1378460962688,"patch":[[{"diffs":[[0,"con-"],[-1,"search"],[1,"arrow-right"],[0,"\n   "]],"start1":115,"start2":115,"length1":14,"length2":19}]],"length":8858,"saved":false}
 {"ts":1378461107635,"patch":[[{"diffs":[[0,"ow-right"],[1," Slide slider to see chage in time"],[0,"\n    #ma"]],"start1":122,"start2":122,"length1":16,"length2":50}]],"length":8892,"saved":false}
 {"ts":1378461180764,"patch":[[{"diffs":[[0,"w-right "],[1,"\n    | "],[0,"Slide sl"]],"start1":123,"start2":123,"length1":16,"length2":23}]],"length":8899,"saved":false}
+{"ts":1378461699452,"patch":[[{"diffs":[[0,"el-body "],[1,"\n        p\n            span.label.label-success Green\n            span.label.label-primary Blue\n\n        p\n            | "],[0,"This is "]],"start1":479,"start2":479,"length1":16,"length2":137}]],"length":9020,"saved":false}
