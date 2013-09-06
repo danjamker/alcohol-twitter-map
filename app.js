@@ -23,7 +23,7 @@ var express = require('express')
     BSON = require('mongodb').pure().BSON,
     DataProvider = require('./dataprovider').DataProvider,
     WordProvider = require('./wordfreqProvider').WordProvider,
-    PostCodeProvider = require('./postcodeProvider').PostCodeProvider;
+    PostCodeProvider = require('./postcodeprovider').PostCodeProvider;
 
 
 var sort = function (list) {
