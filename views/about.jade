@@ -9,11 +9,11 @@ block content
     ul
         li The map was one of the more ticker parts of the system to impliment. This was implimented by using 
             a(href='http://www.polymaps.com/') Polymaps 
-            for the UI and the background maps. Over this was layered a GeoJSON vector maps, for both a national and regonal scales. However the local map depected the boundries of each postcode in the UK ment that the file was over 17Mb in size. For this reason each vectore was imported into a 
+            | for the UI and the background maps. Over this was layered a GeoJSON vector maps, for both a national and regonal scales. However the local map depected the boundries of each postcode in the UK ment that the file was over 17Mb in size. For this reason each vectore was imported into a 
             a(href='http://www.mongobd.com') MongoDB 
-            hosted on 
+            | hosted on 
             a(href='http://www.mongolab.com') MongoLab
-            . The reson for using a MongoDB soultion was the abbility to index all the vector points, thus giving us the abbility to query the vector map. This meant that we could return only the postcodes which the end used was viewing on the map in there browser, thus significantly reducing the size of the files being sent to the end user. Even though the maps are now stored on a database they can be download from here:
+            | . The reson for using a MongoDB soultion was the abbility to index all the vector points, thus giving us the abbility to query the vector map. This meant that we could return only the postcodes which the end used was viewing on the map in there browser, thus significantly reducing the size of the files being sent to the end user. Even though the maps are now stored on a database they can be download from here:
             ul
                 li 
                     a(href="/National.json") Natinoal
@@ -22,11 +22,11 @@ block content
 
         li The server was writen in Node.js using the Express frame work for routing and rendering of pages. The theme and structure of each pages was based on the 
             a(href='http://www.getbootstrap.com') Bootstrap 
-            and the charts where implimentes with the 
+            | and the charts where implimentes with the 
             a(href='https://github.com/nnnick/Chart.js') Chart.js 
-            Both of which made the development of the website quick and simple as my background is not in CSS of website layout. Hosting was provided by 
+            | Both of which made the development of the website quick and simple as my background is not in CSS of website layout. Hosting was provided by 
             a(href='http://www.heroku.com') Heroku 
-            which offer 36hrs free hositng a month, and allows for easy deplyment through git push, and fully suports the Node.js system. 
+            | which offer 36hrs free hositng a month, and allows for easy deplyment through git push, and fully suports the Node.js system. 
 
         li Data Processing was impliment in 
             a(href="http://hadoop.apache.org/") Haddop
