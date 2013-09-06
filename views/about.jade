@@ -9,11 +9,11 @@ block content
     ul
         li The map was one of the more ticker parts of the system to impliment. This was implimented by using 
             a(href='http://www.polymaps.com/') Polymaps 
-            for the UI and the background maps. Over this was layers a GeoJSON vector maps, for both a national and regonal scales, however for local map which depected the boundries of each postcode there where so many vectores that the file was over 17Mb. For this reason each vectore was imported into a 
+            for the UI and the background maps. Over this was layered a GeoJSON vector maps, for both a national and regonal scales. However the local map depected the boundries of each postcode in the UK ment that the file was over 17Mb in size. For this reason each vectore was imported into a 
             a(href='http://www.mongobd.com') MongoDB 
             hosted on 
             a(href='http://www.mongolab.com') MongoLab
-            . The reson for using a MongoDB soultion was the abbility to index all the vector points and used them for searching. This mean that from the browser a message is sent to the server saying what the browser can see, then the server only return what is within the view of polymaps. This reduced the size of each packet. The original files can be download from here
+            . The reson for using a MongoDB soultion was the abbility to index all the vector points, thus giving us the abbility to query the vector map. This meant that we could return only the postcodes which the end used was viewing on the map in there browser, thus significantly reducing the size of the files being sent to the end user. Even though the maps are now stored on a database they can be download from here:
             ul
                 li 
                     a(href="/National.json") Natinoal
